@@ -1,6 +1,5 @@
 package ru.netology.domain;
 
-import java.util.Collections;
 import java.util.Set;
 
 public class Issue {
@@ -8,15 +7,15 @@ public class Issue {
     private String name;
     private boolean isOpened;
     private int date;
-    private Set<String> author;
+    private String author;
     private Set<String> label;
-    private Set<String> assignee;
+    private String assignee;
     private int commentsCount;
 
     public Issue() {
     }
 
-    public Issue(int id, String name, boolean isOpened, int date, Set<String> author, Set<String> label, Set<String> assignee, int commentsCount) {
+    public Issue(int id, String name, boolean isOpened, int date, String author, Set<String> label, String assignee, int commentsCount) {
         this.id = id;
         this.name = name;
         this.isOpened = isOpened;
@@ -59,11 +58,11 @@ public class Issue {
         this.date = date;
     }
 
-    public Set<String> getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Set<String> author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -75,11 +74,11 @@ public class Issue {
         this.label = label;
     }
 
-    public Set<String> getAssignee() {
+    public String getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Set<String> assignee) {
+    public void setAssignee(String assignee) {
         this.assignee = assignee;
     }
 
@@ -90,4 +89,13 @@ public class Issue {
     public void setCommentsCount(int commentsCount) {
         this.commentsCount = commentsCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Issue issue = (Issue) o;
+        return author.equals(issue.author) && label.equals(issue.label) && assignee.equals(issue.assignee);
+    }
+
 }

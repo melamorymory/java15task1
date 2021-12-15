@@ -13,6 +13,10 @@ public class IssueRepository {
         issues.add(issue);
     }
 
+    public Collection<Issue> findAll() {
+        return issues;
+    }
+
     public Collection<Issue> findOpened() {
         issues.removeIf(el -> !el.isOpened());
         return issues;
@@ -23,34 +27,35 @@ public class IssueRepository {
         return issues;
     }
 
-    public Collection<Issue> findByAuthor(Set<String> author) {
-        issues.removeIf(el -> !issues.contains(el.getAuthor()));
-        return issues;
+    public Collection<Issue> findByAuthor(String author) {
+        Collection<Issue> result = new ArrayList<>();
+        for (Issue issue : issues) {
+            if (author.equals(issue.getAuthor())) {
+                result.add(issue);
+            }
+        }
+        return result;
     }
 
     public Collection<Issue> findByLabel(Set<String> label) {
-        issues.removeIf(el -> !issues.contains(el.getLabel()));
-        return issues;
-    }
-
-    public Collection<Issue> findByAssignee(Set<String> assignee) {
-        issues.removeIf(el -> !issues.contains(el.getAssignee()));
-        return issues;
-    }
-
-    public void openById(int id) {
+        Collection<Issue> result = new ArrayList<>();
         for (Issue issue : issues) {
-            if (issue.getId() == id) {
-                issue.setOpened(true);
+            if (label.equals(issue.getLabel())) {
+                result.add(issue);
             }
         }
+        return result;
     }
 
-    public void closeById(int id) {
+    public Collection<Issue> findByAssignee(String assignee) {
+        Collection<Issue> result = new ArrayList<>();
         for (Issue issue : issues) {
-            if (issue.getId() == id) {
-                issue.setOpened(false);
+            if (assignee.equals(issue.getAssignee())) {
+                result.add(issue);
             }
         }
+        return result;
     }
+
+
 }

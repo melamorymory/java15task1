@@ -29,7 +29,7 @@ public class IssueManager {
         return repository.findClosed();
     }
 
-    public Collection<Issue> findByAuthor(Set<String> author) {
+    public Collection<Issue> findByAuthor(String author) {
         return repository.findByAuthor(author);
     }
 
@@ -37,15 +37,23 @@ public class IssueManager {
         return repository.findByLabel(label);
     }
 
-    public Collection<Issue> findByAssignee(Set<String> assignee) {
+    public Collection<Issue> findByAssignee(String assignee) {
         return repository.findByAssignee(assignee);
     }
 
     public void openById(int id) {
-        repository.openById(id);
+        for (Issue issue : repository.findAll()) {
+            if (issue.getId() == id) {
+                issue.setOpened(true);
+            }
+        }
     }
 
     public void closeById(int id) {
-        repository.closeById(id);
+        for (Issue issue : repository.findAll()) {
+            if (issue.getId() == id) {
+                issue.setOpened(false);
+            }
+        }
     }
 }
